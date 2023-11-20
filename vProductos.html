@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Last-Modified" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <link rel="stylesheet" type="text/css" href="estilos.css" />
+
+    <title>FORMULARIO PRODUCTO</title>
+  </head>
+
+  <body>
+    <div id="formulario">
+      <a id="cerrar" href="menu.html">X</a>
+      <div id="crud">
+        <label for="buscarNombre">BUSCAR POR NOMBRE:</label><br /><br />
+        <input type="text" id="buscarNombre" />
+        <button id="buscarN">BUSCAR</button>
+        <form>
+          <label for="producto">PRODUCTO:</label><br />
+          <input
+            type="text"
+            id="producto"
+            size="30"
+            pattern="[A-Za-z]{5}"
+            title="Introduce entre 2 y 30 letras sin acentos"
+            required
+          />
+
+          <br />
+          <label for="precio">PRECIO:</label><br />
+          <input type="text" id="precio" maxlength="30" />
+
+          <br />
+          <label for="stock">STOCK:</label> <br />
+          <input type="text" id="stock" />
+
+          <br />
+          <label for="category">CATEGORY:</label><br />
+          <select name="category" id="category">
+            <option value="-">-</option>
+            <option value="1">LINEA BLANCA</option>
+            <option value="2">MENAJE</option>
+            <option value="3">CAMA</option>
+            <option value="4">MUEBLES</option>
+            <option value="5">ROPA DE DAMAS</option>
+            <option value="6">ROPA DE CABALLEROS</option>
+            <option value="7">ROPA DE SEÑORITAS</option>
+            <option value="8">ROPA DE NIÑOS</option>
+            <option value="9">ROPA DE NIÑAS</option>
+            <option value="10">ELECTRODOMÉSTICOS</option>
+            <option value="11">COMPUTO</option>
+          </select>
+        </form>
+        <p id="mensajeError"></p>
+
+        <br />
+        <button id="inserta">Añadir</button>
+
+        <br /><br />
+        <button id="atras">ATRÁS |</button>
+        <button id="adelante">| AVANZAR</button>
+        <br /><br />
+        <button id="boton1">Producto 0</button>
+        <br /><br />
+      </div>
+      <button id="showTable">Mostrar Tabla</button>
+      <div id="vista_vertical" hidden><table></table></div>
+    </div>
+
+    <div id="caja_modificar" hidden>
+      <form id="form_modificar">
+        <label for="producto">PRODUCTO:</label><br />
+        <input
+          type="text"
+          id="producto_mod"
+          size="30"
+          pattern="[A-Za-z]{5}"
+          title="Introduce entre 2 y 30 letras sin acentos"
+          required
+        />
+
+        <br />
+        <label for="precio">PRECIO:</label><br />
+        <input type="text" id="precio_mod" maxlength="30" />
+
+        <br />
+        <label for="stock">STOCK:</label> <br />
+        <input type="text" id="stock_mod" />
+
+        <br />
+        <label for="category">CATEGORY:</label><br />
+        <select name="category" id="category_mod">
+          <option value="-">-</option>
+          <option value="1">LINEA BLANCA</option>
+          <option value="2">MENAJE</option>
+          <option value="3">CAMA</option>
+          <option value="4">MUEBLES</option>
+          <option value="5">ROPA DE DAMAS</option>
+          <option value="6">ROPA DE CABALLEROS</option>
+          <option value="7">ROPA DE SEÑORITAS</option>
+          <option value="8">ROPA DE NIÑOS</option>
+          <option value="9">ROPA DE NIÑAS</option>
+          <option value="10">ELECTRODOMÉSTICOS</option>
+          <option value="11">COMPUTO</option>
+        </select>
+      </form>
+      <button id="modifica">Guardar</button>
+    </div>
+
+    <script type="module" src="cProductos.js"></script>
+  </body>
+</html>

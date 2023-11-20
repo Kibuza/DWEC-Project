@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menú</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        align-items: center;
+      }
+
+      nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #eee;
+        width: 200px;
+        margin-top: 5%;
+        border-radius: 10px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #333;
+        width: 60%;
+        padding: 1em 2em; /* Tamaño uniforme para todos los enlaces */
+        margin: 0.3em 0;
+        border-radius: 4px;
+        background-color: #fff;
+        transition: background-color 0.3s;
+        display: inline-block; /* Asegura que el tamaño se aplique correctamente */
+        text-align: center; /* Centra el texto dentro del enlace */
+      }
+
+      nav a:hover {
+
+          background-color: rgb(223, 106, 106);
+
+      }
+
+      .apagado {
+        background-color: rgb(226, 173, 173);
+      }
+
+      .encendido {
+        background-color: rgb(228, 124, 124);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="apagado" href="#">Categoría</a>
+      <a class="apagado" href="#">Detalle</a>
+      <a class="apagado" href="#">Empleado</a>
+      <a class="apagado" href="#">Pago</a>
+      <a class="encendido" href="vProductos.html">Producto</a>
+      <a class="apagado" href="#">Tipo de Pago</a>
+      <a class="apagado" href="#">Venta</a>
+    </nav>
+  </body>
+</html>
