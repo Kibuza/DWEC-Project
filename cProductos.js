@@ -35,11 +35,22 @@ class Controller_Productos {
       .getElementById("modifica")
       .addEventListener("click", function (event) {
         event.preventDefault();
+
+        document.getElementById("caja_modificar").hidden = true;
+
         CtrlProductos.elem = CtrlProductos.obtenerFormularioMod();
+        var indice = document.getElementById("index_id").value;
+        console.log(indice);
         //Le estoy pasando al método del modelo un objeto que ya tiene la id de la base de datos:
         mDatosProductos.modificar(
-          CtrlProductos.elem
+          CtrlProductos.elem, indice
         );
+
+        async function refrescarTabla(){
+          await CtrlProductos.actualizarTabla();
+        }
+        refrescarTabla();
+
       });
 
     //BOTÓN TABLA
@@ -139,7 +150,7 @@ class Controller_Productos {
     encabezado.appendChild(document.createElement("th")).innerHTML = "Category";
     encabezado.appendChild(document.createElement("th")).innerHTML = "Acciones";
 
-    // Recorro el arrayProductos elemento a elemento, pongo cada atributo de producto en una fila
+    // Recorro el arrayProductos elemento a elemento, pongo cada atributo de producto en una fila, cada "elemento" es un producto del array
     arrayProductos.forEach((element) => {
       var fila = tabla.appendChild(document.createElement("tr"));
       fila.appendChild(document.createElement("td")).innerHTML = element.nombre;
@@ -155,9 +166,9 @@ class Controller_Productos {
       // Campo oculto con el idprod del producto
       var inputIdProd = document.createElement("input");
       inputIdProd.type = "text";
-      inputIdProd.id = "idprod";
+      inputIdProd.id = "idprod"; // Nombre del campo que se enviará al backend
       inputIdProd.value = element.idprod;
-      inputIdProd.name = "idprod"; // Nombre del campo que se enviará al backend
+      inputIdProd.name = "idprod";
       inputIdProd.hidden = true;
 
       // Botón de submit para eliminar
@@ -186,27 +197,32 @@ class Controller_Productos {
       formElemento.addEventListener("submit", function (event) {
         event.preventDefault(); // Evita que el formulario se envíe automáticamente
         // Determinar cuál es el botón que se ha pulsado
+
+        //ELIMINAR
         if (event.submitter.id === "eliminar_concreto") {
 
           mDatosProductos.eliminar(element.idprod);
+          async function refrescarTabla(){
+            await CtrlProductos.actualizarTabla();
+          }
+          refrescarTabla();
+
+          //MODIFICAR
         } else if (event.submitter.id === "modificar_concreto") {
 
           //Muestras el formulario de modificación
           var cajaMod = document.getElementById("caja_modificar");
           cajaMod.hidden = false;
 
-          //Incluyes en el formulario una caja hidden con el id del producto.
-          var formMod = document.getElementById("form_modificar");
-          var inputMod = document.createElement("input");
-          inputMod.type = "text";
-          inputMod.id = "id_mod";
-          inputMod.value = inputIdProd.value;
-          inputMod.name = "id_mod"; // Nombre del campo que se enviará al backend
-          inputMod.hidden = true;
+          //Sacas la posición que ocupa el elemento en el array, para usarla con el splice en modificar.
+          var indice_array = arrayProductos.indexOf(element);
 
-          fila.id = "selected";
+          //Insertas los valores en las dos cajas hidden del formulario
+          document.getElementById("id_mod").value = element.idprod; // Campo que se enviará al backend con el id
+          document.getElementById("index_id").value = indice_array;
 
-          formMod.appendChild(inputMod);
+          fila.id = "selected"; //Le añades el id selected a la fila para que cambie de color
+
           btnEliminar.hidden = true;
         }
       });
@@ -252,7 +268,7 @@ class Controller_Productos {
     var id = document.getElementById("id_mod").value;
 
     var prod = new Producto(product, price, stock, category);
-    prod.id = id;
+    prod.id = id; //Añades la propiedad id al objeto para usarla luego
 
     return prod;
   }

@@ -8,7 +8,7 @@ class Producto {
     this.nombre = nombre;
     this.precio = precio;
     this.stock = stock;
-    this.idcategoria = idcat;
+    this.idcat = idcat;
   }
 
   getNombre() {
@@ -33,7 +33,7 @@ class Producto {
   }
 
   getCategoria() {
-    return this.idcategoria;
+    return this.idcat;
   }
   setCategoria(idcat) {
     this.idcat = idcat;

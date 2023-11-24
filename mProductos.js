@@ -15,8 +15,7 @@ class DatosProductos {
     return this.arrayproductos;
   }
 
-  modificar(DatosModificados) {
-
+  modificar(DatosModificados, indice) {
     const jsonAEnviar = JSON.stringify(DatosModificados);
     console.log("Vas a modificar -->", jsonAEnviar);
 
@@ -30,7 +29,7 @@ class DatosProductos {
     if (phptext == "Error") {
       console.log("Algo no ha funcionado en la BBDD")
     } else {
-      location.reload();
+      this.arrayproductos.splice(indice, 1, DatosModificados);
     }
   }
 
@@ -50,7 +49,6 @@ class DatosProductos {
       //console.log("Algo no ha funcionado en la BBDD")
     } else {
       this.arrayproductos.push(producto);
-      location.reload();
     }
   }
 
@@ -71,7 +69,7 @@ class DatosProductos {
       //console.log("Algo no ha funcionado en la BBDD")
     } else {
       this.arrayproductos.pop(producto);
-      location.reload();
+      //location.reload();
     }
   }
 
