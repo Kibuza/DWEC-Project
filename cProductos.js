@@ -42,15 +42,12 @@ class Controller_Productos {
         var indice = document.getElementById("index_id").value;
         console.log(indice);
         //Le estoy pasando al método del modelo un objeto que ya tiene la id de la base de datos:
-        mDatosProductos.modificar(
-          CtrlProductos.elem, indice
-        );
+        mDatosProductos.modificar(CtrlProductos.elem, indice);
 
-        async function refrescarTabla(){
+        async function refrescarTabla() {
           await CtrlProductos.actualizarTabla();
         }
         refrescarTabla();
-
       });
 
     //BOTÓN TABLA
@@ -178,17 +175,25 @@ class Controller_Productos {
       btnEliminar.name = "borrado_especifico";
       btnEliminar.value = "ELIMINAR";
 
-      // Botón de submit para eliminar
+      // Botón de submit para modificar
       var btnModificar = document.createElement("input");
       btnModificar.type = "submit";
       btnModificar.id = "modificar_concreto";
       btnModificar.name = "modificado_especifico";
       btnModificar.value = "MODIFICAR";
 
+      // Botón de submit para categoria
+      var btnCategoria = document.createElement("input");
+      btnCategoria.type = "submit";
+      btnCategoria.id = "categoria_open";
+      btnCategoria.name = "categoria_button";
+      btnCategoria.value = "CATEGORIA";
+
       // Agregar elementos al formulario
       formElemento.appendChild(inputIdProd);
       formElemento.appendChild(btnEliminar);
       formElemento.appendChild(btnModificar);
+      formElemento.appendChild(btnCategoria);
 
       // Agregar formulario a la fila
       fila.appendChild(document.createElement("td")).appendChild(formElemento);
@@ -200,16 +205,14 @@ class Controller_Productos {
 
         //ELIMINAR
         if (event.submitter.id === "eliminar_concreto") {
-
           mDatosProductos.eliminar(element.idprod);
-          async function refrescarTabla(){
+          async function refrescarTabla() {
             await CtrlProductos.actualizarTabla();
           }
           refrescarTabla();
 
           //MODIFICAR
         } else if (event.submitter.id === "modificar_concreto") {
-
           //Muestras el formulario de modificación
           var cajaMod = document.getElementById("caja_modificar");
           cajaMod.hidden = false;
@@ -224,6 +227,15 @@ class Controller_Productos {
           fila.id = "selected"; //Le añades el id selected a la fila para que cambie de color
 
           btnEliminar.hidden = true;
+
+          //BOTÓN CATEGORIA
+        } else if (event.submitter.id === "categoria_open") {
+
+          mDatosProductos.categoria(element.idcat);
+          async function refrescarTabla() {
+            await CtrlProductos.actualizarTabla();
+          }
+          refrescarTabla();
         }
       });
     });
@@ -242,6 +254,11 @@ class Controller_Productos {
     document.getElementById("stock").value = producto.stock;
     document.getElementById("category").value = producto.idcat;
   }
+
+  /*fijarValores(categoria){
+    document.getElementById("producto").value = categoria.nombre;
+    document.getElementById("category").value = categoria.idcat;
+  }*/
 
   obtenerFormulario() {
     // Crea obj Producto sacando los valores del formulario html

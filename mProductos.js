@@ -73,6 +73,23 @@ class DatosProductos {
     }
   }
 
+  categoria(idcat){
+    console.log("Vas a filtrar por categoria -->", idcat);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "./backend/filtrar-categoria.php", false);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.send("id=" + idcat);
+    var phptext = xhr.responseText;
+    if (phptext == "Error") {
+      console.log("Algo no ha funcionado en la BBDD")
+    } else {
+      this.arrayproductos = JSON.parse(phptext);
+      console.log(this.arrayproductos);
+    }
+  }
+
   async CargarProductos() {
     self = this;
     const promesaUsuarios = new Promise(function (resolve, reject) {

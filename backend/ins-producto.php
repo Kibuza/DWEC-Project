@@ -7,7 +7,7 @@ $dsn = 'mysql:dbname=VENTAS;host=localhost';
 $json = $_POST["json"];
 $data = json_decode($json);
 
-$category = $data-> idcategoria;
+$category = $data-> idcat;
 $nombre = $data-> nombre;
 $precio = $data-> precio;
 $stock = $data-> stock;
